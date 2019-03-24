@@ -3,10 +3,11 @@ import React from 'react';
 class DogSearch extends React.Component{
   constructor() {
     super();
-    this.state = ({
-      value : ''
-    })
-
+    //initialize local state
+    this.state = {
+      value : '',
+      dog: []
+    }
   }
 
   render () {
