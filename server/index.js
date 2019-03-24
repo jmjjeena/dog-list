@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 
-app.get('/dogs', function (req, res) {
+app.get('/', function (req, res) {
 res.send('Hello');
 });
 
