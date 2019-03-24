@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 res.send('Hello');
 });
 
-app.post('/dogs', function(req, res) {
+app.post('/', function(req, res) {
   res.send("Received");
 })
 
