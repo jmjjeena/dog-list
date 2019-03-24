@@ -27,9 +27,6 @@ class App extends React.Component {
       data: JSON.stringify({dogBeed: breed}),
       success: () => {
         console.log('The breed is: ', breed);
-      },
-      error: () => {
-        console.log('Oops!! something went wrong');
       }
     })
   }

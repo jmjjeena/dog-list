@@ -8,11 +8,14 @@ app.use(bodyParser.urlencoded({extended : false}));
 app.use(express.static(__dirname + '/../client/dist'));
 
 
-app.get('/', function (req, res) {
+app.get('/dogs', function (req, res) {
 res.send('Hello');
 });
 
+app.post('/dogs', function(req, res) {
+  res.send("Received");
+})
 
 app.listen(port, function() {
-  console.log('listening on port ${port}!');
+  console.log(`listening on port ${port}!`);
 });
