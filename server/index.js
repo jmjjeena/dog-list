@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var port  =  process.env.PORT || 3000
 var app = express();
 
 app.use( bodyParser.json() );
@@ -11,6 +11,7 @@ app.get('/', function (req, res) {
 res.send('Hello');
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+
+app.listen(port, function() {
+  console.log('listening on port ${port}!');
 });

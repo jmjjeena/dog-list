@@ -9,15 +9,38 @@ body {
   width: 80%
 }
 
+.search-bar {
+  background-color: #eee;
+  line-height: 1;
+  display: inline-block;
+  height: 40px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.btn {
+  background-color: #eee;
+  border-radius: 3px;
+  padding: .25rem .5rem;
+  display: inline-block;
+  border-bottom: 0;
+  margin-bottom: 5px;
+}
+
 .search-bar .btn {
-  border-radius: 2px;
-  border-color: #d3d3d3;
-  background: #f8f8f8;
-  width: 20%;
-  margin-left: -1px;
+  vertical-align: top;
+  margin: 0;
+  height: 40px;
+  background-color: #1a91db;
+  color: #fff;
+  line-height: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .search-bar .btn:hover {
+  transition: all 300ms ease-out;
+  text-decoration: none;
   border-color: #c6c6c6;
   background: #f0f0f0;
   box-shadow: 0 1px 0 rgba(0,0,0,0.10);
@@ -25,9 +48,12 @@ body {
 
 /* Dog Image */
 .image-holder {
-  margin-left: 20px;
-  height: 100px;
-  width: 500px;
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  margin-bottom: 1rem;
+  vertical-align: middle;
+  border: 0;
 }
 
 .image-holder-details {
