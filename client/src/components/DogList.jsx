@@ -3,7 +3,7 @@ import DogListEntry from './DogListEntry.jsx';
 
 var DogList = function() {
   return (
-    <div>
+    <div className="dog-list">
       <DogListEntry />
     </div>
   )
