@@ -4,7 +4,8 @@
   "description": "Practice for TA",
   "main": "mock-data.js",
   "scripts": {
-    "react-dev": "webpack -d -watch"
+    "react-dev": "webpack -d --watch",
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/jmjjeena/dog-list#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "nodemon": "^1.18.10",
     "react": "^16.8.5",
     "react-dom": "^16.8.5"
   },
