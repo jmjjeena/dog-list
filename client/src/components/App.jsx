@@ -10,6 +10,9 @@ class App extends React.Component {
     super(props);
     // Binding event handler methods to an instance
     this.search = this.search.bind(this);
+    this.state = {
+      dog: []
+    }
   }
 
   // componentDidMount()
@@ -19,9 +22,15 @@ class App extends React.Component {
     $.ajax({
       method: "POST",
       url: '/dogs',
-      data: {dogBeed: breed},
-      dataType: "text",
-      success: console.log('The breed is: ', breed)
+      contentType: "application/json",
+      dataType: "json",
+      data: JSON.stringify({dogBeed: breed}),
+      success: () => {
+        console.log('The breed is: ', breed);
+      },
+      error: () => {
+        console.log('Oops!! something went wrong');
+      }
     })
   }
 
