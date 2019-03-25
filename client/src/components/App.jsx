@@ -1,65 +1,73 @@
 import React from 'react';
 import $ from 'jquery';
+import axios from 'axios';
 import DogSearch from './DogSearch.jsx';
 import DogImage from './DogImage.jsx';
-
+// import images from '../../../server/mock-data.js/index.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dogs: []
+      // images: images,
+      // dogs: [],
+      selectedBreed: null,
+      breeds: null
     }
     // Binding event handler methods to an instance
-    this.search = this.search.bind(this);
-    // this.getList=this.getList.bind(this);
-    this.setState=this.setState.bind(this);
+    this.getBreeds = this.getBreeds.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.getImages = this.getImages.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.getList();
-  // }
+  componentWillMount() {
+   this.getBreeds();
+  }
 
-  // getList() {
-  //   console.log("request data");
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: "/",
-  //     success: function(breed) {
-  //       this.setState({
-  //         dogs: JSON.parse(breed)
-  //       })
-  //     },
-  //     error: function(error) {
-  //       console.log('Error' ,error)
-  //     }
-  //   })
-  // }
+  getBreeds() {
+    axios.get('/breeds')
+      .then((response) => {
+        console.log('response is: ', response.data);
+        this.setState({breeds: response.data})
 
-  search(breed) {
-    console.log(`${breed} was searched`);
-    $.ajax({
-      method: "POST",
-      url: '/',
-      contentType: "application/json",
-      dataType: "json",
-      data: JSON.stringify({dogBeed: breed}),
-      success: console.log('The breed is: ', breed)
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+  }
+
+  handleClick(curBreed) {
+    this.setState({selectedBreed: curBreed}, this.getImages);
+  }
+
+  getImages() {
+    axios.get(`/images?name=${this.state.selectedBreed}`)
+    .then((response) => {
+      console.log('Image is: ', response.data)
     })
+    .catch((error) => {
+      console.log(error)
+    });
   }
+
 
   render () {
-   var searched;
-   if(this.state.search !== null) {
-     searched = <div>{this.state.search}</div>
-   }
+    console.log("breedsInState: ", this.state.breeds);
+    var options = [];
+    var breeds = this.state.breeds
+    if(breeds !== null) {
+      for (var i = 0; i < breeds.length; i++) {
+        options.push(<div key={i} data-name={breeds[i]} onClick={(e) => this.handleClick(e.target.dataset.name)}>{breeds[i]}</div>)
+      }
+    }
+
     return (
       <div>
         <div>
-          <DogSearch onSearch={this.search}/>
+          {options}
         </div>
         <div>
-          <DogImage />
+          {/* <DogImage images = {this.state.images}/> */}
         </div>
       </div>
     );
@@ -67,3 +75,9 @@ class App extends React.Component {
 }
 
 export default App;
+
+//create a var options
+// iterate over the existing breeds array
+// push each breed in breeds create <option></option>
+
+
