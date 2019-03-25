@@ -4,6 +4,9 @@ var port  =  process.env.PORT || 3000
 var app = express();
 var {breeds, dogImages} = require('./mock-data');
 var helper = require('./helper')
+var db = require('./db');
+var models = require('./model').Dog;
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -16,9 +19,12 @@ res.send('Hello');
 
 app.get('/breeds', function(req, res) {
   // var breed = Object.keys(breeds)
-  console.log(Object.keys(breeds));
-  var breedNamesArray = Object.keys(breeds);
-  res.send(breedNamesArray);
+  // console.log(Object.keys(breeds));
+  // var breedNamesArray = Object.keys(breeds);
+  // res.send(breedNamesArray);
+  models.Dog.find().then((breeds) => {
+    res.status(200).send(breeds);
+  });
 });
 
 app.get('/images', function(req, res) {
