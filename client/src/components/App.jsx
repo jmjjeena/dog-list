@@ -1,7 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
 import axios from 'axios';
-import DogSearch from './DogSearch.jsx';
 import DogImage from './DogImage.jsx';
 // import images from '../../../server/mock-data.js/index.js';
 
@@ -9,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // images: images,
+      images: null,
       // dogs: [],
       selectedBreed: null,
       breeds: null
@@ -44,6 +42,7 @@ class App extends React.Component {
     axios.get(`/images?name=${this.state.selectedBreed}`)
     .then((response) => {
       console.log('Image is: ', response.data)
+      this.setState({images: response.data})
     })
     .catch((error) => {
       console.log(error)
@@ -54,10 +53,18 @@ class App extends React.Component {
   render () {
     console.log("breedsInState: ", this.state.breeds);
     var options = [];
+    var breedImg = [];
     var breeds = this.state.breeds
+    var images = this.state.images
     if(breeds !== null) {
       for (var i = 0; i < breeds.length; i++) {
         options.push(<div key={i} data-name={breeds[i]} onClick={(e) => this.handleClick(e.target.dataset.name)}>{breeds[i]}</div>)
+      }
+    }
+    if(images !== null) {
+      for( var i = 0; i < images.length; i++) {
+        breedImg.push(<DogImage src={images[i]}/>)
+        // breedImg.push(<img src={images[i]}/>)
       }
     }
 
@@ -67,7 +74,9 @@ class App extends React.Component {
           {options}
         </div>
         <div>
-          {/* <DogImage images = {this.state.images}/> */}
+          {/* <DogImage images={this.state.images}/> */}
+          {breedImg}
+          {this.state.images && this.state.images.map(image => <DogImage src={image}/>)}
         </div>
       </div>
     );

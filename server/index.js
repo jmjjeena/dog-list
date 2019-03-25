@@ -22,7 +22,7 @@ app.get('/breeds', function(req, res) {
 });
 
 app.get('/images', function(req, res) {
-  console.log('Recived get request for images: ', req.query.name)
+  console.log('Received get request for images: ', req.query.name)
   let breedName = req.query.name
   helper.getBreedImages(breedName, res)
 })
